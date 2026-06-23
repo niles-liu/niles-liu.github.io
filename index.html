@@ -1,0 +1,814 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Niles Liu</title>
+<meta name="description" content="Niles Liu. Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.">
+<link rel="canonical" href="https://niles-liu.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%232d6a8e'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23ebeef0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Niles Liu">
+<meta property="og:description" content="Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.">
+<meta property="og:url" content="https://niles-liu.github.io/">
+<meta property="og:image" content="https://niles-liu.github.io/headshot.jpg">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --ground:#ebeef0; --raise:#f4f6f7; --text:#14181b; --muted:#5e6973;
+    --line:#d7dde1; --accent:#2d6a8e; --accent-soft:rgba(45,106,142,.10);
+    --serif:Charter,"Bitstream Charter","Iowan Old Style","Sorts Mill Goudy",Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","JetBrains Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--ground:#0f1417;--raise:#161c20;--text:#e4e9ec;--muted:#8c97a0;
+      --line:#222a2f;--accent:#63adce;--accent-soft:rgba(99,173,206,.12);}
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--text);
+    font-family:var(--serif);font-size:18px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  .wrap{max-width:720px;margin:0 auto;padding:clamp(30px,6vw,68px) clamp(20px,5vw,30px) 96px;}
+
+  a{color:var(--accent);text-decoration:none;
+    text-underline-offset:3px;text-decoration-thickness:1px;}
+  a:hover{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  /* ---- header ---- */
+  .head{display:flex;align-items:center;gap:clamp(16px,4vw,26px);flex-wrap:wrap;}
+  .portrait{width:92px;height:92px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+    border:1px solid var(--line);filter:grayscale(.12);}
+  .ident{flex:1 1 260px;min-width:240px;}
+  h1{font-family:var(--serif);font-weight:600;line-height:1.04;letter-spacing:-.018em;
+    font-size:clamp(2.3rem,7vw,3rem);margin:0;}
+  .affil{font-family:var(--mono);font-size:.72rem;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--muted);margin:.85em 0 0;line-height:1.7;}
+  .affil b{color:var(--text);font-weight:600;}
+  .links{display:flex;flex-wrap:wrap;gap:.4em 1.3em;font-family:var(--mono);
+    font-size:.78rem;letter-spacing:.02em;margin-top:1em;}
+
+  /* ---- thematic figures (animated canvas, theme-aware, mouse-interactive) ---- */
+  /* a hairline above every figure makes it its own break, not a tail of the
+     section above it */
+  figure{margin:clamp(36px,7vw,54px) 0 0;padding-top:clamp(26px,5.5vw,38px);
+    border-top:1px solid var(--line);}
+  .vfigure{margin:clamp(36px,7vw,54px) 0 0;padding-top:clamp(26px,5.5vw,38px);
+    border-top:1px solid var(--line);}
+  .otframe{position:relative;border:1px solid var(--line);background:var(--raise);
+    border-radius:3px;overflow:hidden;}
+  .figcanvas{display:block;width:100%;height:clamp(172px,30vw,208px);
+    touch-action:pan-y;}
+  .figcanvas.live{cursor:crosshair;}
+  figcaption{font-family:var(--mono);font-size:.685rem;letter-spacing:.02em;
+    color:var(--muted);line-height:1.6;margin-top:.7em;}
+  figcaption b{color:var(--accent);font-weight:500;}
+  .hint{color:var(--muted);opacity:.85;}
+
+  /* ---- sections ---- */
+  .section{margin-top:clamp(2.6rem,7vw,3.6rem);
+    border-top:1px solid var(--line);padding-top:1.1rem;}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0 0 1rem;}
+  p{margin:0 0 .9em;}
+  .lede em{font-style:italic;}
+  .keywords{font-family:var(--mono);font-size:.74rem;letter-spacing:.02em;
+    color:var(--muted);margin-top:1.1em;}
+
+  /* ---- research / experience entries ---- */
+  .entry{margin:0 0 1.7rem;}
+  .entry:last-child{margin-bottom:0;}
+  .entry-top{display:flex;justify-content:space-between;align-items:baseline;
+    gap:.6em 1.2em;flex-wrap:wrap;font-family:var(--mono);}
+  .tag{font-size:.66rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--accent);}
+  .when{font-size:.72rem;letter-spacing:.02em;color:var(--muted);
+    white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .entry h3{font-family:var(--serif);font-weight:600;font-size:1.14rem;
+    line-height:1.25;margin:.3em 0 .12em;}
+  .sub{font-family:var(--mono);font-size:.72rem;letter-spacing:.01em;
+    color:var(--muted);margin:0 0 .5em;}
+  .entry p{margin:.35em 0 0;}
+
+  /* ---- compact rows (education / teaching / beyond) ---- */
+  .row{display:flex;justify-content:space-between;align-items:baseline;
+    gap:.5em 1.2em;flex-wrap:wrap;margin:.55em 0;}
+  .row .what{flex:1 1 auto;}
+  .row .what b{font-weight:600;}
+  .row .note{font-family:var(--mono);font-size:.72rem;color:var(--muted);
+    white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .row .gloss{display:block;color:var(--muted);font-size:.92rem;margin-top:.1em;}
+
+  footer{margin-top:clamp(3rem,8vw,4.5rem);padding-top:1.1rem;
+    border-top:1px solid var(--line);font-family:var(--mono);
+    font-size:.7rem;letter-spacing:.06em;color:var(--muted);
+    display:flex;justify-content:space-between;gap:1em;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="head">
+    <img class="portrait" src="headshot.jpg" width="92" height="92" alt="Portrait of Niles Liu">
+    <div class="ident">
+      <h1>Niles Liu</h1>
+      <p class="affil">
+        Incoming <b>Harvard M.S. Data Science</b> &middot; thesis track<br>
+        <b>MIT 2026</b> &middot; Mathematics &amp; Computer Science
+      </p>
+      <nav class="links" aria-label="Contact and profiles">
+        <a href="mailto:nliu1@g.harvard.edu">nliu1@g.harvard.edu</a>
+        <a href="https://www.linkedin.com/in/niles-liu">LinkedIn</a>
+        <a href="https://github.com/niles-liu">GitHub</a>
+        <a href="cv.pdf" download="Niles-Liu-CV.pdf">CV&nbsp;&darr;</a>
+      </nav>
+    </div>
+  </header>
+
+  <figure>
+    <div class="otframe">
+      <canvas id="ot" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption>
+      <b>Optimal transport</b> moves probability mass from one distribution to another along the
+      cheapest coupling. It sits at the mathematical core of much of my research. How do you sample
+      the modes a dataset under-represents, and how do you know when a model has them right?
+    </figcaption>
+  </figure>
+
+  <section class="section" aria-labelledby="about">
+    <h2 class="eyebrow" id="about">About</h2>
+    <p class="lede">I was drawn to machine learning by a simple premise: from data, we can learn
+    the distributions behind it and reason about what comes next. The questions that hold me are
+    about <em>coverage and calibration</em>: covering the modes a dataset barely shows, and
+    knowing how far to trust a prediction. My work follows that
+    thread, across generative modeling and optimal transport for high-dimensional, imbalanced data,
+    uncertainty quantification for high-stakes settings, and the evaluation methods that tell me
+    whether any of it holds up. I care more about getting the method right than about architecture
+    novelty. The problems that pull me in are the ones where being honest about what we know is the
+    hard part.</p>
+    <p class="lede">I have done as much of this outside the lab as in it, building production systems
+    and consulting on real problems, where a method only counts once it survives messy data and a
+    deadline.</p>
+    <p class="keywords">generative modeling &middot; optimal transport &middot; geometric deep
+    learning &middot; uncertainty quantification &middot; conformal prediction &middot;
+    evaluation methodology &middot; ML for science</p>
+  </section>
+
+  <figure class="vfigure">
+    <div class="otframe">
+      <canvas id="cp" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption><b>Conformal prediction</b> turns a point estimate into an interval with a
+    coverage guarantee, and lets the band widen exactly where the model has earned less
+    confidence. Calibration like this is what makes a prediction safe to act on.</figcaption>
+  </figure>
+
+  <section class="section" aria-labelledby="research">
+    <h2 class="eyebrow" id="research">Research</h2>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Optimal transport</span>
+        <span class="when">ETH Z&uuml;rich</span>
+      </div>
+      <h3>Generative modeling on manifolds</h3>
+      <p class="sub">Learning &amp; Adaptive Systems Group &middot; Dr. Ya-Ping Hsieh</p>
+      <p>The challenge was imbalance. Training distributions are long-tailed across protein
+      families, so diffusion samplers drift toward the modes they have seen most. I proposed a
+      trajectory-consistency objective, called adjoint matching, that aligns forward and reverse
+      dynamics to encourage exploration, then derived a manifold-aware variant for SE(3)-constrained
+      spaces. In controlled tests it recovered minority modes that standard samplers collapse
+      without trading away accuracy.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Uncertainty quantification</span>
+        <span class="when">MIT IMES</span>
+      </div>
+      <h3>Calibrated UQ for clinical machine learning</h3>
+      <p class="sub">Institute for Medical Engineering &amp; Science &middot; Dr. Li-Wei H. Lehman</p>
+      <p>In the ICU, a false arrhythmia alarm is a calibration problem before it is an accuracy
+      one. The cost of crying wolf and the cost of a missed event are nothing alike. I used
+      deep-ensemble fully-convolutional networks and conformal-prediction measures to put a
+      calibrated number on each prediction and bring down false negatives.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Evaluation methodology</span>
+        <span class="when">Starwood Property Trust</span>
+      </div>
+      <h3>Reproducing expert comparable selection</h3>
+      <p class="sub">Self-directed</p>
+      <p>I framed real-estate comparable selection as learning-to-rank over roughly six million
+      properties resolved across several databases, trained on the comp sets expert analysts had
+      actually chosen. The result I am proudest of is a negative one. A plain per-row classifier
+      beat the listwise ranking objectives on realistic full-pool retrieval, even though those
+      rankers won on closed-set cross-validation. That gap turned out to be a methodological trap
+      worth fixing: I rebuilt evaluation around full-pool tests, pre-registered ship-or-reject
+      gates, and honest reporting of nulls, then showed the real ceiling lives in candidate
+      generation rather than in the ranker.</p>
+    </article>
+  </section>
+
+  <figure class="vfigure">
+    <div class="otframe">
+      <canvas id="rag" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption><b>Retrieval-augmented generation</b> grounds a model in evidence rather than memory:
+    it pulls the passages closest to a question, then writes its answer from what it found. Letting a
+    model look things up instead of trusting it to remember is what makes the answer trustworthy.</figcaption>
+  </figure>
+
+  <section class="section" aria-labelledby="industry">
+    <h2 class="eyebrow" id="industry">Selected industry work</h2>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Independent consulting</span>
+        <span class="when">Stealth</span>
+      </div>
+      <h3>Pivotal-trial biostatistics</h3>
+      <p>Brought in as an independent consultant, I owned the analytics for a medical-device
+      company's pivotal Phase III trial end to end, as the only data scientist on the engagement.
+      I built the pipeline from locked clinical-data exports to analysis-ready datasets, then ran
+      the statistics on top of it. Survival analysis, recurrent-event modeling, and a hierarchical
+      composite-endpoint adjudication for win-ratio comparison. I wrote a Monte Carlo trial
+      simulator to stress-test endpoint definitions and statistical power, and built the
+      operational analytics that tracked activation across dozens of international trial sites. One
+      consultant, the full statistical stack of a pivotal trial.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Software engineering</span>
+        <span class="when">Burmester &amp; Vogel</span>
+      </div>
+      <h3>Maritime document intelligence</h3>
+      <p>A top contributor to an Azure pipeline that turns messy maritime documents into
+      structured, queryable records, I built several of its components. Most notably, an in-process
+      TF-IDF and logistic-regression classifier with confidence-gated LLM escalation beat the LLM
+      outright on the highest-stakes class, at a fraction of the cost. The last few percent of
+      accuracy never came from more data. They came from methods that could absorb the
+      inconsistencies of real documents.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Data science</span>
+        <span class="when">Starwood Property Trust</span>
+      </div>
+      <h3>A real-estate ML portfolio, built solo</h3>
+      <p>At Starwood, every project I take on is mine end to end, built solo. Over the past year
+      that has meant five production-grade systems: the comparable-selection research above; a
+      data-only valuation model with rolling-origin validation and conformal intervals; a similarity
+      engine that reconciles two databases that agree on almost nothing; a document-extraction
+      platform now in production; and a market-scoring agent on a point-in-time panel with a
+      deterministic, auditable rubric. What stands out is the pace: in a single recent month I
+      shipped two of them, pushed a third to production, and built a fourth from nothing to a working
+      v1.</p>
+    </article>
+  </section>
+
+  <figure class="vfigure">
+    <div class="otframe">
+      <canvas id="sv" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption><b>Time-to-event analysis.</b> A survival curve steps down as events accrue, while
+    the shaded band tracks how much the remaining data can still support and the ticks mark patients
+    censored before the end. Two arms pulling apart is the question a pivotal trial exists to answer.</figcaption>
+  </figure>
+
+  <section class="section" aria-labelledby="education">
+    <h2 class="eyebrow" id="education">Education</h2>
+    <div class="row">
+      <span class="what"><b>Harvard University</b>, M.S. Data Science (thesis track)</span>
+      <span class="note">2026&ndash;27</span>
+    </div>
+    <div class="row">
+      <span class="what"><b>MIT</b>, B.S. Mathematics &amp; Computer Science, with minors in
+        Statistics &amp; Data Science and Music
+        <span class="gloss">GPA 5.0/5.0 &middot; Phi Beta Kappa</span></span>
+      <span class="note">2022&ndash;26</span>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="teaching">
+    <h2 class="eyebrow" id="teaching">Teaching</h2>
+    <p>I came to teaching unsure I was outgoing enough for it. What I learned is that the job is
+    mostly listening. As a Head TA at the MIT Experimental Study Group, in Linear Algebra and
+    earlier in Multivariable Calculus and General Chemistry, I started to measure a good session by
+    how much the students talked, not how much I did. I was later invited to teach my own ES.1802
+    section, and received the Fiekowsky Award for Distinguished Teaching in 2026.</p>
+  </section>
+
+  <figure class="vfigure">
+    <div class="otframe">
+      <canvas id="str" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption><b>A vibrating string</b> takes its pitch from the length left free to ring, and its
+    colour from the overtones riding above the fundamental. A fluency that long predates the
+    technical ones.</figcaption>
+  </figure>
+
+  <section class="section" aria-labelledby="beyond">
+    <h2 class="eyebrow" id="beyond">Beyond research</h2>
+    <div class="row">
+      <span class="what"><b>Violin</b>, nineteen years and counting. The last four with the MIT
+        Chamber Music Society, on an Emerson/Harris scholarship.</span>
+    </div>
+    <div class="row">
+      <span class="what"><b>Fencing</b> (foil), competitive since 2012. Two-time USFCA Division III
+        All-America at MIT.</span>
+    </div>
+    <p class="gloss" style="margin-top:.7em">Both reward what research rewards. Patient work, with
+    no way to disguise failure, and wins that are concrete and entirely your own.</p>
+  </section>
+
+  <footer>
+    <span>Niles Liu</span>
+    <span>Cambridge, MA</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var darkq  = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // sum-of-uniforms ~ approx normal in roughly [-1, 1]
+  function gauss(){ return (Math.random()+Math.random()+Math.random()+Math.random()-2)/2; }
+  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+  function lerp(a,b,u){ return a+(b-a)*u; }
+
+  // theme palette, read from the live CSS vars so dark mode stays in sync
+  function readTheme(){
+    var cs = getComputedStyle(document.documentElement);
+    return {
+      accent: cs.getPropertyValue("--accent").trim() || "#2d6a8e",
+      muted:  cs.getPropertyValue("--muted").trim()  || "#5e6973",
+      line:   cs.getPropertyValue("--line").trim()   || "#d7dde1",
+      raise:  cs.getPropertyValue("--raise").trim()  || "#f4f6f7"
+    };
+  }
+  var TH = readTheme();
+
+  // a small engine: DPR-aware sizing, rAF loop, reduced-motion + pointer plumbing.
+  // each figure supplies build(W,H,state) and draw(ctx,W,H,TH,dt,still,mouse,state).
+  function makeFig(id, opts){
+    var cv = document.getElementById(id);
+    if(!cv || !cv.getContext) return;
+    var ctx = cv.getContext("2d");
+    var W=0,H=0,dpr=1,last=0,raf=0;
+    var state = {};
+    var mouse = { x:null, y:null, inside:false };
+
+    function frame(dt, still){
+      ctx.clearRect(0,0,W,H);
+      opts.draw(ctx,W,H,TH,dt,still,mouse,state);
+    }
+    function resize(){
+      var r = cv.getBoundingClientRect();
+      W=r.width; H=r.height;
+      dpr = Math.min(window.devicePixelRatio||1, 2);
+      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      if(opts.build) opts.build(W,H,state);
+      if(reduce.matches) frame(0,true);
+    }
+    function loop(now){
+      var dt=(now-last)/1000; last=now;
+      if(dt>0.05) dt=0.05;                       // clamp after tab-switch
+      frame(dt,false);
+      raf = window.requestAnimationFrame(loop);
+    }
+    function start(){
+      if(raf) window.cancelAnimationFrame(raf);
+      if(reduce.matches){ frame(0,true); return; }
+      last = performance.now();
+      raf = window.requestAnimationFrame(loop);
+    }
+
+    cv.addEventListener("pointermove", function(e){
+      var r = cv.getBoundingClientRect();
+      mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; mouse.inside = true;
+      if(reduce.matches) frame(0,true);          // keep interaction alive when still
+    });
+    cv.addEventListener("pointerleave", function(){
+      mouse.inside=false; mouse.x=null; mouse.y=null;
+      if(reduce.matches) frame(0,true);
+    });
+
+    resize();
+    start();
+    window.addEventListener("resize", resize);
+    if(reduce.addEventListener) reduce.addEventListener("change", start);
+    if(darkq.addEventListener) darkq.addEventListener("change", function(){
+      window.setTimeout(function(){ TH = readTheme(); if(reduce.matches) frame(0,true); }, 0);
+    });
+  }
+
+  // helpers shared by the static-frame draws
+  function dot(ctx,x,y,r){ ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill(); }
+  function kern(x,c,w){ var d=(x-c)/w; return Math.exp(-d*d); }   // gaussian influence
+
+  /* ---------- 1. optimal transport: mass flowing between distributions ---------- */
+  makeFig("ot", {
+    build: function(W,H,s){
+      s.N = 170; s.parts = []; s.scrub = 0; s.tg = 0.5;
+      var srcX=0.15*W, srcY=0.50*H, tgtX=0.85*W, topY=0.24*H, botY=0.82*H;
+      for(var i=0;i<s.N;i++){
+        var g = gauss();                          // signed position within the source blob
+        var heavy = g < 0.18;                     // monotone coupling: upper ~72% feed the dense top mode
+        if(Math.random() < 0.04) heavy = !heavy;  // a few deliberate crossovers
+        s.parts.push({
+          sx: srcX+gauss()*0.045*W, sy: srcY + g*0.26*H,
+          tx: tgtX+gauss()*0.035*W, ty: (heavy?topY:botY)+gauss()*(heavy?0.11:0.075)*H,
+          arc: gauss()*0.05*H, t: Math.random(), v: 0.10+Math.random()*0.07
+        });
+      }
+    },
+    draw: function(ctx,W,H,TH,dt,still,m,s){
+      if(!s.parts) return;
+      var srcX=0.15*W, tgtX=0.85*W;
+      // the cursor scrubs the transport "time": all the mass slides along its paths
+      // together, so the source blob morphs through its in-between shapes to the modes
+      if(m.inside && m.x!=null) s.tg = clamp((m.x-srcX)/(tgtX-srcX), 0, 1);
+      var easeK = still ? 1 : Math.min(1, dt*6);
+      s.scrub += ((m.inside?1:0) - s.scrub) * easeK;
+
+      ctx.fillStyle = TH.accent;
+      for(var i=0;i<s.parts.length;i++){
+        var p = s.parts[i];
+        if(!still){ p.t += p.v*dt; if(p.t>1) p.t-=1; }   // auto-drift underneath
+        var u = lerp(p.t, s.tg, s.scrub);                // blend toward the scrubbed time
+        var e = Math.pow(u,2.5);                          // parabolic: travel together, then bow out to the modes
+        var x = p.sx + (p.tx-p.sx)*u;
+        var y = p.sy + (p.ty-p.sy)*e + p.arc*Math.sin(Math.PI*u);
+        var env = Math.sin(Math.PI*u);
+        // when scrubbing, keep the mass visible at the endpoints instead of fading it out
+        ctx.globalAlpha = lerp(0.22+0.68*env, 0.60+0.30*env, s.scrub);
+        dot(ctx, x, y, lerp(1.05+0.95*env, 1.4+0.7*env, s.scrub));
+      }
+      ctx.globalAlpha = 1;
+    }
+  });
+
+  /* ---------- 2. conformal prediction: a fit that bends toward the cursor -------- *
+   * the cursor is a new observation; the curve bends locally toward it and the     *
+   * band stretches the rest of the way to keep it covered.                         */
+  makeFig("cp", {
+    build: function(W,H,s){
+      s.time=0; s.amp=0; s.bump=0; s.side=1; s.mx=0.5;
+      s.pts = [];
+      var n=34;
+      for(var i=0;i<n;i++){
+        var x = clamp((i+0.5)/n + gauss()*0.010, 0, 1);
+        var hw = (0.05+0.17*x);                  // band half-width, fraction-of-H units
+        // ~1 in 8 lands clearly outside the band (the coverage story); the rest fill it
+        var out = (i % 8 === 5);
+        var dy = out ? (Math.random()<0.5?-1:1)*hw*(1.35+Math.random()*0.6)
+                     : (Math.random()*2-1)*hw*0.82;
+        s.pts.push({ x:x, dy:dy, out:out, ph: Math.random()*6.28,
+                     bob: 0.6+Math.random()*0.8 });
+      }
+    },
+    draw: function(ctx,W,H,TH,dt,still,m,s){
+      if(!s.pts) return;
+      if(!still) s.time += dt;
+      var x0=0.07*W, x1=0.95*W, BW=0.17;         // bend kernel half-width
+      var PX = function(x){ return x0+(x1-x0)*x; };
+      var BY = function(x){ return (0.64-0.34*x)*H; };          // baseline data line (pixels)
+      var breathe = 1 + 0.05*Math.sin(s.time*1.05);
+      var hwPx = function(x){ return (0.05+0.17*x)*H*breathe; };// base band half-width
+
+      // --- target deformation: pull the curve part-way toward the cursor, then let
+      //     the band reach the rest of the way so the new point stays covered ---
+      var tAmp=0, tBump=0, side=s.side;
+      if(m.inside && m.x!=null){
+        var mx = clamp((m.x-x0)/(x1-x0), 0, 1);
+        var my = clamp(m.y, 6, H-6);
+        s.mx = mx;
+        tAmp = (my - BY(mx)) * 0.30;             // curve leans lightly toward the point
+        var resid = my - (BY(mx) + tAmp);        // remaining gap to the point
+        side = resid >= 0 ? 1 : -1;
+        tBump = clamp(Math.abs(resid)*0.32, 0, 0.24*H);  // band widens part-way, not forced to cover
+      }
+      if(m.inside) s.side = side;
+      var easeK = still ? 1 : Math.min(1, dt*6);
+      s.amp  += (tAmp  - s.amp )*easeK;
+      s.bump += (tBump - s.bump)*easeK;
+
+      var MY = function(x){ return BY(x) + s.amp*kern(x,s.mx,BW); };       // bent mean
+      var hwUp = function(x){ return hwPx(x) + (s.side<0 ? s.bump*kern(x,s.mx,BW) : 0); };
+      var hwLo = function(x){ return hwPx(x) + (s.side>0 ? s.bump*kern(x,s.mx,BW) : 0); };
+      var STEPS=56, i, x;
+
+      // confidence band (bends and bulges with the curve)
+      ctx.beginPath();
+      for(i=0;i<=STEPS;i++){ x=i/STEPS; var px=PX(x); (i?ctx.lineTo(px,MY(x)-hwUp(x)):ctx.moveTo(px,MY(x)-hwUp(x))); }
+      for(i=STEPS;i>=0;i--){ x=i/STEPS; ctx.lineTo(PX(x), MY(x)+hwLo(x)); }
+      ctx.closePath();
+      ctx.fillStyle = TH.accent; ctx.globalAlpha = 0.12; ctx.fill();
+
+      // bent mean curve
+      ctx.globalAlpha = 1; ctx.strokeStyle = TH.accent; ctx.lineWidth = 1.6;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      ctx.beginPath();
+      for(i=0;i<=STEPS;i++){ x=i/STEPS; (i?ctx.lineTo(PX(x),MY(x)):ctx.moveTo(PX(x),MY(x))); }
+      ctx.stroke();
+
+      // fixed observations (the data does not move). a point outside the current
+      // (bent) band reads as a hollow ring; inside the band, a filled dot.
+      for(i=0;i<s.pts.length;i++){
+        var p=s.pts[i];
+        var wobble = still ? 0 : 0.006*H*p.bob*Math.sin(s.time*1.3 + p.ph);
+        var cx=PX(p.x), cy=clamp(BY(p.x) + p.dy*H + wobble, 6, H-6);
+        var outside = cy < MY(p.x)-hwUp(p.x) || cy > MY(p.x)+hwLo(p.x);
+        if(outside){
+          ctx.globalAlpha=1; ctx.fillStyle=TH.raise;
+          dot(ctx,cx,cy,3.1);
+          ctx.strokeStyle=TH.accent; ctx.lineWidth=1.4; ctx.beginPath();
+          ctx.arc(cx,cy,3.1,0,6.2832); ctx.stroke();
+        } else {
+          ctx.globalAlpha = still ? 0.9 : (0.62 + 0.3*Math.sin(s.time*1.8 + p.ph));
+          ctx.fillStyle=TH.accent; dot(ctx,cx,cy,2.3);
+        }
+      }
+      ctx.globalAlpha=1;
+
+      // the cursor itself, drawn as the new observation the fit is reacting to
+      if(m.inside && m.x!=null){
+        var ux=PX(s.mx), uy=clamp(m.y,6,H-6);
+        ctx.strokeStyle=TH.accent; ctx.globalAlpha=0.30; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.arc(ux,uy,7,0,6.2832); ctx.stroke();
+        ctx.globalAlpha=1; ctx.fillStyle=TH.accent; dot(ctx,ux,uy,3.4);
+        ctx.strokeStyle=TH.raise; ctx.lineWidth=1.4; ctx.beginPath();
+        ctx.arc(ux,uy,3.4,0,6.2832); ctx.stroke();
+        ctx.globalAlpha=1;
+      }
+    }
+  });
+
+  /* ---------- 3. retrieval-augmented generation -------------------------------- *
+   * the cursor is the query: its nearest passages in the corpus light up and feed *
+   * a generator that streams a grounded answer.                                   */
+  makeFig("rag", {
+    build: function(W,H,s){
+      s.time=0; s.fill=0; s.K=4; s.docs=[];
+      var i;
+      for(i=0;i<56;i++){
+        s.docs.push({ bx:(0.05+Math.random()*0.45)*W, by:(0.12+Math.random()*0.76)*H,
+                      x:0, y:0, ph:Math.random()*6.28, sp:0.4+Math.random()*0.8 });
+      }
+      s.genX=0.66*W; s.genY=0.5*H;
+      s.q={ x:0.30*W, y:0.5*H };
+      // the streamed answer: token bars to the right of the generator
+      s.out=[ {yf:0.37,fr:0.95}, {yf:0.455,fr:0.80}, {yf:0.54,fr:1.0}, {yf:0.625,fr:0.58} ];
+    },
+    draw: function(ctx,W,H,TH,dt,still,m,s){
+      if(!s.docs) return;
+      if(!still) s.time += dt;
+      var i, j;
+
+      // query: follows the cursor in the embedding region, else drifts on its own
+      if(m.inside && m.x!=null){
+        s.q.x = clamp(m.x, 0.04*W, 0.52*W);
+        s.q.y = clamp(m.y, 0.08*H, 0.92*H);
+      } else if(!still){
+        s.q.x = (0.28 + 0.18*Math.sin(s.time*0.5))*W;
+        s.q.y = (0.50 + 0.30*Math.sin(s.time*0.37+1.3))*H;
+      }
+
+      // corpus drift + distances to the query
+      for(i=0;i<s.docs.length;i++){
+        var d=s.docs[i];
+        d.x = d.bx + (still?0:Math.cos(s.time*0.3*d.sp+d.ph))*0.006*W;
+        d.y = d.by + (still?0:Math.sin(s.time*0.3*d.sp+d.ph))*0.006*H;
+        var dx=d.x-s.q.x, dy=d.y-s.q.y; d.d2=dx*dx+dy*dy;
+      }
+      // K nearest passages (retrieval)
+      var chosen=[];
+      for(j=0;j<s.K;j++){
+        var best=-1, bd=Infinity;
+        for(i=0;i<s.docs.length;i++){
+          if(chosen.indexOf(i)>=0) continue;
+          if(s.docs[i].d2<bd){ bd=s.docs[i].d2; best=i; }
+        }
+        if(best>=0) chosen.push(best);
+      }
+
+      // corpus (faint)
+      ctx.fillStyle=TH.muted;
+      for(i=0;i<s.docs.length;i++){ ctx.globalAlpha=0.32; dot(ctx,s.docs[i].x,s.docs[i].y,1.7); }
+      ctx.globalAlpha=1;
+
+      // query -> retrieved connectors, and retrieved -> generator paths + pulses
+      for(j=0;j<chosen.length;j++){
+        var rd=s.docs[chosen[j]];
+        ctx.strokeStyle=TH.accent; ctx.globalAlpha=0.28; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(s.q.x,s.q.y); ctx.lineTo(rd.x,rd.y); ctx.stroke();
+        ctx.strokeStyle=TH.line; ctx.globalAlpha=0.22;
+        ctx.beginPath(); ctx.moveTo(rd.x,rd.y); ctx.lineTo(s.genX,s.genY); ctx.stroke();
+        var pu = (s.time*0.6 + j*0.25) % 1;
+        ctx.globalAlpha = 0.85*Math.sin(Math.PI*pu); ctx.fillStyle=TH.accent;
+        dot(ctx, lerp(rd.x,s.genX,pu), lerp(rd.y,s.genY,pu), 1.8);
+      }
+      ctx.globalAlpha=1;
+
+      // retrieved passages, highlighted
+      ctx.fillStyle=TH.accent;
+      for(j=0;j<chosen.length;j++){ ctx.globalAlpha=0.92; dot(ctx,s.docs[chosen[j]].x,s.docs[chosen[j]].y,2.8); }
+      ctx.globalAlpha=1;
+
+      // generator (the model), gently pulsing
+      var gw=0.075*W, gh=0.26*H, pulse=0.5+0.5*Math.sin(s.time*2);
+      ctx.fillStyle=TH.accent; ctx.globalAlpha=0.10+0.06*pulse;
+      roundRect(ctx, s.genX-gw/2, s.genY-gh/2, gw, gh, 4); ctx.fill();
+      ctx.globalAlpha=0.8; ctx.strokeStyle=TH.accent; ctx.lineWidth=1.3;
+      roundRect(ctx, s.genX-gw/2, s.genY-gh/2, gw, gh, 4); ctx.stroke();
+      ctx.globalAlpha=1;
+
+      // streamed answer: token bars fill left-to-right, then loop with a pause
+      var ax=s.genX+gw/2+0.035*W, aMax=Math.max(0, 0.97*W-ax);
+      if(!still){ s.fill += dt*0.4; if(s.fill>1.7) s.fill=0; }
+      var prog = still ? 1 : clamp(s.fill,0,1);
+      var tot=0; for(i=0;i<s.out.length;i++) tot+=s.out[i].fr;
+      var typed=prog*tot, cum=0;
+      for(i=0;i<s.out.length;i++){
+        var ow=s.out[i].fr*aMax, oy=s.out[i].yf*H;
+        var fl=clamp((typed-cum)/s.out[i].fr, 0, 1);
+        ctx.fillStyle=TH.accent; ctx.globalAlpha=0.10;
+        roundRect(ctx, ax, oy-3, ow, 6, 2); ctx.fill();
+        if(fl>0){ ctx.globalAlpha=0.85; roundRect(ctx, ax, oy-3, ow*fl, 6, 2); ctx.fill(); }
+        cum+=s.out[i].fr;
+      }
+      ctx.globalAlpha=1;
+
+      // the query marker (cursor), on top
+      ctx.fillStyle=TH.accent; ctx.globalAlpha=1; dot(ctx,s.q.x,s.q.y,3.4);
+      ctx.strokeStyle=TH.raise; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.arc(s.q.x,s.q.y,3.4,0,6.2832); ctx.stroke();
+      ctx.strokeStyle=TH.accent; ctx.globalAlpha=0.3; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.arc(s.q.x,s.q.y,7,0,6.2832); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+  });
+
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+
+  /* ---------- 4. time-to-event: a Kaplan-Meier survival curve ------------------- *
+   * two arms step down and separate; the curve sweeps in; hover reads survival.   */
+  makeFig("sv", {
+    build: function(W,H,s){
+      s.time = 0;
+      // fixed event schedules so the picture is stable across resizes
+      s.treat = buildArm([0.07,0.17,0.27,0.39,0.52,0.66,0.80,0.91],
+                         [0.05,0.05,0.045,0.05,0.05,0.045,0.05,0.05]);
+      s.ctrl  = buildArm([0.04,0.10,0.16,0.22,0.29,0.36,0.44,0.53,0.62,0.72,0.83,0.93],
+                         [0.06,0.07,0.06,0.07,0.07,0.07,0.06,0.07,0.06,0.06,0.06,0.06]);
+      s.tcens = [0.23,0.46,0.71,0.87];
+      s.ccens = [0.32,0.6];
+    },
+    draw: function(ctx,W,H,TH,dt,still,m,s){
+      if(!s.treat) return;
+      if(!still) s.time += dt;
+      var x0=0.10*W, x1=0.96*W, yTop=0.12*H, yBot=0.88*H;
+      var X = function(t){ return x0+(x1-x0)*clamp(t,0,1); };
+      var Y = function(v){ return yBot-(yBot-yTop)*clamp(v,0,1); };
+
+      // sweep the curve in, hold, then restart
+      var sweep = still ? 1 : clamp((s.time % 5.0)/3.0, 0, 1);
+
+      // baseline + left axis
+      ctx.strokeStyle=TH.line; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x0,yTop); ctx.lineTo(x0,yBot); ctx.lineTo(x1,yBot); ctx.stroke();
+
+      // CI band around the treatment arm (widens as fewer remain at risk)
+      ctx.beginPath();
+      var STEPS=60, i, t, up=[], dn=[];
+      for(i=0;i<=STEPS;i++){
+        t=(i/STEPS)*sweep;
+        var sv = survAt(s.treat, t);
+        var hw = 0.02 + 0.13*t;
+        up.push([X(t), Y(clamp(sv+hw,0,1))]);
+        dn.push([X(t), Y(clamp(sv-hw,0,1))]);
+      }
+      ctx.moveTo(up[0][0],up[0][1]);
+      for(i=1;i<up.length;i++) ctx.lineTo(up[i][0],up[i][1]);
+      for(i=dn.length-1;i>=0;i--) ctx.lineTo(dn[i][0],dn[i][1]);
+      ctx.closePath();
+      ctx.fillStyle=TH.accent; ctx.globalAlpha=0.10; ctx.fill(); ctx.globalAlpha=1;
+
+      // control arm (muted), then treatment arm (accent)
+      stepPath(ctx, s.ctrl, sweep, X, Y); ctx.strokeStyle=TH.muted; ctx.lineWidth=1.5;
+      ctx.lineJoin="round"; ctx.lineCap="round"; ctx.stroke();
+      stepPath(ctx, s.treat, sweep, X, Y); ctx.strokeStyle=TH.accent; ctx.lineWidth=1.8; ctx.stroke();
+
+      // censoring ticks
+      ctx.strokeStyle=TH.accent; ctx.lineWidth=1.3;
+      drawCens(ctx, s.tcens, s.treat, sweep, X, Y);
+      ctx.strokeStyle=TH.muted;
+      drawCens(ctx, s.ccens, s.ctrl, sweep, X, Y);
+
+      // hover: vertical time cursor + survival readouts on each arm
+      if(m.inside && m.x!=null){
+        var q = clamp((m.x-x0)/(x1-x0), 0, sweep);
+        var qx = X(q);
+        ctx.strokeStyle=TH.muted; ctx.globalAlpha=0.5; ctx.setLineDash([2,3]);
+        ctx.beginPath(); ctx.moveTo(qx,yTop); ctx.lineTo(qx,yBot); ctx.stroke();
+        ctx.setLineDash([]); ctx.globalAlpha=1;
+        ctx.fillStyle=TH.accent; dot(ctx, qx, Y(survAt(s.treat,q)), 3.0);
+        ctx.fillStyle=TH.muted;  dot(ctx, qx, Y(survAt(s.ctrl, q)), 3.0);
+      }
+    }
+  });
+
+  function buildArm(times, drops){
+    var pts=[], sv=1;
+    for(var i=0;i<times.length;i++){ sv *= (1-drops[i]); pts.push({ t:times[i], s:sv }); }
+    return pts;
+  }
+  function survAt(arm, t){
+    var sv=1;
+    for(var i=0;i<arm.length;i++){ if(arm[i].t<=t) sv=arm[i].s; else break; }
+    return sv;
+  }
+  function stepPath(ctx, arm, maxT, X, Y){
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(1));
+    var cs=1, i;
+    for(i=0;i<arm.length;i++){
+      if(arm[i].t > maxT) break;
+      ctx.lineTo(X(arm[i].t), Y(cs));   // horizontal run
+      ctx.lineTo(X(arm[i].t), Y(arm[i].s)); // drop
+      cs = arm[i].s;
+    }
+    ctx.lineTo(X(maxT), Y(cs));
+  }
+  function drawCens(ctx, ts, arm, maxT, X, Y){
+    for(var i=0;i<ts.length;i++){
+      if(ts[i] > maxT) continue;
+      var x=X(ts[i]), y=Y(survAt(arm, ts[i]));
+      ctx.beginPath(); ctx.moveTo(x, y-3.5); ctx.lineTo(x, y+3.5); ctx.stroke();
+    }
+  }
+
+  /* ---------- 5. a vibrating string: pitch from length, colour from overtones --- *
+   * the cursor is a finger stopping the string — slide it up to shorten the free   *
+   * length and the note rises (and rings faster).                                  */
+  makeFig("str", {
+    build: function(W,H,s){ s.time=0; s.f=0; s.phase=0; },
+    draw: function(ctx,W,H,TH,dt,still,m,s){
+      var xL=0.06*W, xR=0.94*W, y0=0.5*H, span=xR-xL;
+
+      // finger stop: the cursor picks where the string is held (open string by default)
+      var targetF = (m.inside && m.x!=null) ? clamp((m.x-xL)/span, 0, 0.70) : 0;
+      s.f += (targetF - s.f) * (still ? 1 : Math.min(1, dt*7));
+      var xf = xL + s.f*span, L = xR - xf;
+      var om = 2 * (span/L);                     // pitch ∝ 1/length: a shorter string oscillates faster
+      if(!still){ s.time += dt; s.phase += om*dt; }   // accumulate phase so the changing pitch never jumps
+      var A  = 0.30*H * (0.82 + 0.18*Math.sin((still?0.42:s.time)*1.5));   // bow amplitude swells
+      var STEPS=72;
+      ctx.lineCap="round"; ctx.lineJoin="round";
+
+      // a single harmonic standing wave (mode n): shape sin(n*pi*s), swinging at n times
+      // the base rate. harmonic n's phase is just n*phase, so they stay in sync.
+      function mode(n, amp, alpha, lw){
+        var sw = still ? Math.sin(n*1.2) : Math.sin(n*s.phase);
+        ctx.strokeStyle=TH.accent; ctx.globalAlpha=alpha; ctx.lineWidth=lw;
+        ctx.beginPath();
+        for(var k=0;k<=STEPS;k++){ var sx=k/STEPS;
+          var yy=y0 + amp*Math.sin(n*Math.PI*sx)*sw;
+          (k?ctx.lineTo(xf+sx*L,yy):ctx.moveTo(xf+sx*L,yy)); }
+        ctx.stroke();
+      }
+
+      // damped portion nut -> finger (the part the finger silences)
+      ctx.strokeStyle=TH.line; ctx.globalAlpha=0.7; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(xL,y0); ctx.lineTo(xf,y0); ctx.stroke();
+
+      // the overtone series: 3rd (faintest) and 2nd behind the bright fundamental
+      mode(3, 0.40*A, 0.18, 1.1);
+      mode(2, 0.55*A, 0.34, 1.3);
+      mode(1, A,      1.0,  1.8);
+
+      // nodes: nut, finger stop, bridge
+      ctx.fillStyle=TH.accent; dot(ctx,xR,y0,2.6);
+      if(s.f>0.01) dot(ctx,xf,y0,3.0);
+      ctx.fillStyle=TH.muted; dot(ctx,xL,y0,2.2);
+      ctx.globalAlpha=1;
+    }
+  });
+})();
+</script>
+</body>
+</html>
