@@ -282,6 +282,61 @@
     censored before the end. Two arms pulling apart is the question a pivotal trial exists to answer.</figcaption>
   </figure>
 
+  <section class="section" aria-labelledby="opensource">
+    <h2 class="eyebrow" id="opensource">Open source</h2>
+    <p>A single thread runs through the work above. On data that is noisy, autocorrelated, and
+    regime-shifting, the hard part is rarely the model but knowing whether a result is real. These
+    projects are that discipline made concrete, all MIT-licensed and runnable on synthetic data.
+    They are built on walk-forward evaluation, leakage controls, ship-or-reject gates fixed before
+    the run, bootstrap that respects correlated samples, calibrated uncertainty, and a willingness
+    to publish the null.</p>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Validation methodology</span>
+        <span class="when"><a href="https://github.com/niles-liu/quant-strategy-validation">GitHub&nbsp;&nearr;</a></span>
+      </div>
+      <h3>quant-strategy-validation</h3>
+      <p>A leakage-free validation harness for systematic-strategy research. It pre-registers its
+      gates before the run, bootstraps on event clusters, strips the period out of its metrics,
+      walks forward with a measured embargo, and reports its nulls honestly. It also deflates the
+      Sharpe ratio for the number of trials tried and estimates the probability that a backtest is
+      overfit. It makes no alpha claims. The deliverable is the discipline that lets you trust a
+      negative result rather than manufacture an edge.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Forecasting &middot; uncertainty</span>
+        <span class="when"><a href="https://github.com/niles-liu/property-price-avm">GitHub&nbsp;&nearr;</a></span>
+      </div>
+      <h3>property-price-avm</h3>
+      <p>A time-aware automated valuation model with rolling-origin validation and conformal
+      prediction intervals. It puts calibrated uncertainty on a heavy-tailed, regime-shifting
+      target, controls for leakage, and reports honestly on where the real ceiling lives.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Learning to rank</span>
+        <span class="when"><a href="https://github.com/niles-liu/comparable-property-ranker">GitHub&nbsp;&nearr;</a></span>
+      </div>
+      <h3>comparable-property-ranker</h3>
+      <p>Cross-sectional learning-to-rank for real-estate comparables, the same mechanic that
+      drives systematic-equity selection. It is evaluated on realistic full-pool retrieval, the
+      setup that exposes the closed-set cross-validation trap.</p>
+    </article>
+  </section>
+
+  <figure class="vfigure">
+    <div class="otframe">
+      <canvas id="str" class="figcanvas live" aria-hidden="true"></canvas>
+    </div>
+    <figcaption><b>A vibrating string</b> takes its pitch from the length left free to ring, and its
+    colour from the overtones riding above the fundamental. A fluency that long predates the
+    technical ones.</figcaption>
+  </figure>
+
   <section class="section" aria-labelledby="education">
     <h2 class="eyebrow" id="education">Education</h2>
     <div class="row">
@@ -304,15 +359,6 @@
     how much the students talked, not how much I did. I was later invited to teach my own ES.1802
     section, and received the Fiekowsky Award for Distinguished Teaching in 2026.</p>
   </section>
-
-  <figure class="vfigure">
-    <div class="otframe">
-      <canvas id="str" class="figcanvas live" aria-hidden="true"></canvas>
-    </div>
-    <figcaption><b>A vibrating string</b> takes its pitch from the length left free to ring, and its
-    colour from the overtones riding above the fundamental. A fluency that long predates the
-    technical ones.</figcaption>
-  </figure>
 
   <section class="section" aria-labelledby="beyond">
     <h2 class="eyebrow" id="beyond">Beyond research</h2>
