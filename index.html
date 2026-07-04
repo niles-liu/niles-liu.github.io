@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="AW-dH4yvgYDWzZtl6LWYP3TG39SClLrUx1efMGEZbbA">
 <title>Niles Liu</title>
 <meta name="description" content="Niles Liu. Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.">
 <link rel="canonical" href="https://niles-liu.github.io/">
@@ -13,6 +14,38 @@
 <meta property="og:url" content="https://niles-liu.github.io/">
 <meta property="og:image" content="https://niles-liu.github.io/headshot.jpg">
 <meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Niles Liu",
+  "url": "https://niles-liu.github.io/",
+  "image": "https://niles-liu.github.io/headshot.jpg",
+  "email": "mailto:nliu1@g.harvard.edu",
+  "jobTitle": "Machine Learning Researcher",
+  "description": "Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.",
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Massachusetts Institute of Technology"
+    }
+  ],
+  "knowsAbout": [
+    "Generative modeling",
+    "Optimal transport",
+    "Geometric deep learning",
+    "Uncertainty quantification",
+    "Conformal prediction",
+    "Evaluation methodology",
+    "Machine learning for science"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/niles-liu",
+    "https://github.com/niles-liu",
+    "https://www.instagram.com/niles.liu/"
+  ]
+}
+</script>
 <style>
   :root{
     --ground:#ebeef0; --raise:#f4f6f7; --text:#14181b; --muted:#5e6973;
@@ -293,16 +326,26 @@
 
     <article class="entry">
       <div class="entry-top">
+        <span class="tag">Conformal prediction &middot; UQ</span>
+        <span class="when"><a href="https://github.com/niles-liu/conformal-selective-uq-public">GitHub&nbsp;&nearr;</a></span>
+      </div>
+      <h3>conformal-selective-uq-public</h3>
+      <p>A selective conformalized-quantile regression method that holds group-conditional coverage
+      under distribution shift and abstains where the signal is genuinely unrecoverable. The abstention
+      is validated, not asserted: the target carries a known, injected noise floor, so I can show it
+      drops the points that were never recoverable. It makes no alpha or return claim.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
         <span class="tag">Validation methodology</span>
         <span class="when"><a href="https://github.com/niles-liu/quant-strategy-validation">GitHub&nbsp;&nearr;</a></span>
       </div>
       <h3>quant-strategy-validation</h3>
       <p>A leakage-free validation harness for systematic-strategy research. It pre-registers its
-      gates before the run, bootstraps on event clusters, strips the period out of its metrics,
-      walks forward with a measured embargo, and reports its nulls honestly. It also deflates the
-      Sharpe ratio for the number of trials tried and estimates the probability that a backtest is
-      overfit. It makes no alpha claims. The deliverable is the discipline that lets you trust a
-      negative result rather than manufacture an edge.</p>
+      gates, walks forward with an embargo, bootstraps on event clusters, deflates the Sharpe for the
+      trials tried, and reports its nulls honestly. It makes no alpha claims; the deliverable is the
+      discipline to trust a negative result rather than manufacture an edge.</p>
     </article>
 
     <article class="entry">
