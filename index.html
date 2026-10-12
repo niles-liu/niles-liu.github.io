@@ -319,7 +319,7 @@
     <h2 class="eyebrow" id="opensource">Open source</h2>
     <p>A single thread runs through the work above. On data that is noisy, autocorrelated, and
     regime-shifting, the hard part is rarely the model but knowing whether a result is real. These
-    projects are that discipline made concrete, all MIT-licensed and runnable on synthetic data.
+    projects are that discipline made concrete, all MIT-licensed and runnable on a laptop.
     They are built on walk-forward evaluation, leakage controls, ship-or-reject gates fixed before
     the run, bootstrap that respects correlated samples, calibrated uncertainty, and a willingness
     to publish the null.</p>
@@ -327,13 +327,15 @@
     <article class="entry">
       <div class="entry-top">
         <span class="tag">Conformal prediction &middot; UQ</span>
-        <span class="when"><a href="https://github.com/niles-liu/conformal-selective-uq-public">GitHub&nbsp;&nearr;</a></span>
+        <span class="when"><a href="https://github.com/niles-liu/conformal-selective-uq">GitHub&nbsp;&nearr;</a></span>
       </div>
-      <h3>conformal-selective-uq-public</h3>
-      <p>A selective conformalized-quantile regression method that holds group-conditional coverage
-      under distribution shift and abstains where the signal is genuinely unrecoverable. The abstention
-      is validated, not asserted: the target carries a known, injected noise floor, so I can show it
-      drops the points that were never recoverable. It makes no alpha or return claim.</p>
+      <h3>conformal-selective-uq</h3>
+      <p>A pre-registered study of selective conformal regression under distribution shift. The
+      testbed injects a known noise floor into each stock, so abstention is checked against ground
+      truth rather than asserted: the abstention score finds the unrecoverable stocks (AUC 0.81), and
+      online conformal recovers most of the coverage a regime shift destroys (worst-group 0.51 to
+      0.82, against a 0.90 target). Every check is reported as it was frozen, including the two that
+      missed. It makes no alpha or return claim.</p>
     </article>
 
     <article class="entry">
