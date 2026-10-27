@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <meta name="google-site-verification" content="AW-dH4yvgYDWzZtl6LWYP3TG39SClLrUx1efMGEZbbA">
 <title>Niles Liu</title>
-<meta name="description" content="Niles Liu. Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.">
+<meta name="description" content="Niles Liu, Harvard M.S. Data Science student (thesis track) and MIT 2026 graduate. Research interests: time series, machine learning and causal inference.">
 <link rel="canonical" href="https://niles-liu.github.io/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%232d6a8e'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23ebeef0' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Niles Liu">
-<meta property="og:description" content="Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.">
+<meta property="og:description" content="Harvard M.S. Data Science student (thesis track) and MIT 2026 graduate. Research interests: time series, machine learning and causal inference.">
 <meta property="og:url" content="https://niles-liu.github.io/">
 <meta property="og:image" content="https://niles-liu.github.io/headshot.jpg">
 <meta name="twitter:card" content="summary">
@@ -22,22 +23,27 @@
   "url": "https://niles-liu.github.io/",
   "image": "https://niles-liu.github.io/headshot.jpg",
   "email": "mailto:nliu1@g.harvard.edu",
-  "jobTitle": "Machine Learning Researcher",
-  "description": "Generative modeling and optimal transport, uncertainty quantification, and honest evaluation methodology for machine learning.",
+  "jobTitle": "M.S. student, Data Science",
+  "description": "Harvard M.S. Data Science student (thesis track) and MIT 2026 graduate. Research interests: time series, machine learning and causal inference.",
   "alumniOf": [
     {
       "@type": "CollegeOrUniversity",
       "name": "Massachusetts Institute of Technology"
     }
   ],
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Harvard University"
+  },
   "knowsAbout": [
-    "Generative modeling",
-    "Optimal transport",
-    "Geometric deep learning",
+    "Time series",
+    "Causal inference",
+    "Machine learning",
     "Uncertainty quantification",
     "Conformal prediction",
     "Evaluation methodology",
-    "Machine learning for science"
+    "Generative modeling",
+    "Optimal transport"
   ],
   "sameAs": [
     "https://www.linkedin.com/in/niles-liu",
@@ -127,7 +133,7 @@
   /* ---- compact rows (education / teaching / beyond) ---- */
   .row{display:flex;justify-content:space-between;align-items:baseline;
     gap:.5em 1.2em;flex-wrap:wrap;margin:.55em 0;}
-  .row .what{flex:1 1 auto;}
+  .row .what{flex:1 1 16em;}
   .row .what b{font-weight:600;}
   .row .note{font-family:var(--mono);font-size:.72rem;color:var(--muted);
     white-space:nowrap;font-variant-numeric:tabular-nums;}
@@ -147,7 +153,7 @@
     <div class="ident">
       <h1>Niles Liu</h1>
       <p class="affil">
-        Incoming <b>Harvard M.S. Data Science</b> &middot; thesis track<br>
+        <b>Harvard M.S. Data Science</b> &middot; thesis track<br>
         <b>MIT 2026</b> &middot; Mathematics &amp; Computer Science
       </p>
       <nav class="links" aria-label="Contact and profiles">
@@ -161,41 +167,46 @@
 
   <figure>
     <div class="otframe">
-      <canvas id="ot" class="figcanvas live" aria-hidden="true"></canvas>
+      <canvas id="cp" class="figcanvas live" aria-hidden="true"></canvas>
     </div>
-    <figcaption>
-      <b>Optimal transport</b> moves probability mass from one distribution to another along the
-      cheapest coupling. It sits at the mathematical core of much of my research. How do you sample
-      the modes a dataset under-represents, and how do you know when a model has them right?
-    </figcaption>
+    <figcaption><b>Conformal prediction</b> turns a point estimate into an interval with a
+    coverage guarantee, and lets the band widen where the model has earned less confidence. The
+    guarantee assumes exchangeable data; keeping it for time series, where that assumption fails,
+    is a problem I want to work on.</figcaption>
   </figure>
 
   <section class="section" aria-labelledby="about">
     <h2 class="eyebrow" id="about">About</h2>
+    <p class="lede">I am a master's student in Data Science at Harvard, on the thesis track. My
+    research interests are time series, machine learning and causal inference, and where they
+    meet: data that arrive in sequence and drift over time, and how to tell when an estimate from
+    them measures a real effect.</p>
     <p class="lede">I was drawn to machine learning by a simple premise: from data, we can learn
     the distributions behind it and reason about what comes next. The questions that hold me are
     about <em>coverage and calibration</em>: covering the modes a dataset barely shows, and
-    knowing how far to trust a prediction. My work follows that
-    thread, across generative modeling and optimal transport for high-dimensional, imbalanced data,
-    uncertainty quantification for high-stakes settings, and the evaluation methods that tell me
-    whether any of it holds up. I care more about getting the method right than about architecture
-    novelty. The problems that pull me in are the ones where being honest about what we know is the
-    hard part.</p>
+    knowing how far to trust a prediction. My work so far follows that thread, across generative
+    modeling and optimal transport, uncertainty quantification, and the evaluation methods that
+    tell me whether any of it holds up. I care more about getting the method right than about
+    architecture novelty. The problems that pull me in are the ones where being honest about what
+    we know is the hard part.</p>
     <p class="lede">I have done as much of this outside the lab as in it, building production systems
     and consulting on real problems, where a method only counts once it survives messy data and a
     deadline.</p>
-    <p class="keywords">generative modeling &middot; optimal transport &middot; geometric deep
-    learning &middot; uncertainty quantification &middot; conformal prediction &middot;
-    evaluation methodology &middot; ML for science</p>
+    <p class="keywords">time series &middot; causal inference &middot; uncertainty quantification
+    &middot; conformal prediction &middot; evaluation methodology &middot; generative modeling
+    &middot; optimal transport</p>
   </section>
 
   <figure class="vfigure">
     <div class="otframe">
-      <canvas id="cp" class="figcanvas live" aria-hidden="true"></canvas>
+      <canvas id="ot" class="figcanvas live" aria-hidden="true"></canvas>
     </div>
-    <figcaption><b>Conformal prediction</b> turns a point estimate into an interval with a
-    coverage guarantee, and lets the band widen exactly where the model has earned less
-    confidence. Calibration like this is what makes a prediction safe to act on.</figcaption>
+    <figcaption>
+      <b>Optimal transport</b> moves probability mass from one distribution to another along the
+      cheapest coupling. My generative-modeling work at ETH Z&uuml;rich pulled me toward it: how do
+      you sample the modes a dataset under-represents, and how do you know when a model has them
+      right?
+    </figcaption>
   </figure>
 
   <section class="section" aria-labelledby="research">
@@ -207,13 +218,49 @@
         <span class="when">ETH Z&uuml;rich</span>
       </div>
       <h3>Generative modeling on manifolds</h3>
-      <p class="sub">Learning &amp; Adaptive Systems Group &middot; Dr. Ya-Ping Hsieh</p>
-      <p>The challenge was imbalance. Training distributions are long-tailed across protein
-      families, so diffusion samplers drift toward the modes they have seen most. I proposed a
-      trajectory-consistency objective, called adjoint matching, that aligns forward and reverse
-      dynamics to encourage exploration, then derived a manifold-aware variant for SE(3)-constrained
-      spaces. In controlled tests it recovered minority modes that standard samplers collapse
-      without trading away accuracy.</p>
+      <p class="sub">Learning &amp; Adaptive Systems Group &middot; Prof. Ya-Ping Hsieh</p>
+      <p>The challenge was imbalance: diffusion samplers drift toward the modes they saw most in
+      training. I extended the Schr&ouml;dinger bridge framework to time- and state-dependent
+      potentials and derived adjoint-matching equations on manifolds, which make gradient-based
+      optimization possible for molecular conformation sampling. I then implemented the manifold
+      version to reduce that sampling bias and recover under-represented modes, and integrated
+      manifold-exploration techniques into DiffDock to improve its sampling in
+      protein&ndash;ligand docking.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Evaluation methodology</span>
+        <span class="when">Real-estate investment firm</span>
+      </div>
+      <h3>Reproducing expert comparable selection</h3>
+      <p class="sub">Self-directed</p>
+      <p>I framed real-estate comparable selection as learning-to-rank over millions of property
+      records from several databases, trained on the comp sets expert analysts had actually chosen.
+      The result I am proudest of is a negative one: a plain per-row classifier beat the
+      learning-to-rank objectives on realistic full-pool retrieval, even though one of them came
+      close on closed-set cross-validation. I rebuilt the evaluation around that gap with full-pool
+      tests, and moved to multi-seed cross-validation after a noise-floor test showed my single-seed
+      ablations had been chasing noise. That evaluation showed the real ceiling lives in candidate
+      generation rather than in the ranker.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">LLM evaluation</span>
+        <span class="when"><a href="https://doi.org/10.5281/zenodo.23425895" aria-label="Benchmark record on Zenodo">Zenodo&nbsp;&nearr;</a></span>
+      </div>
+      <h3>Benchmarking frontier LLMs on struck-through text</h3>
+      <p class="sub"><a href="https://github.com/niles-liu/pdf-strikethrough-detect/tree/main/benchmarks/frontier">code</a> &middot; <a href="https://huggingface.co/datasets/niles-liu/strikethrough-benchmark" aria-label="Benchmark data on Hugging Face">data</a></p>
+      <p>In a redlined bill, struck text is deleted text: a model that transcribes it as current
+      brings the deletion back. I pre-registered a benchmark of ten frontier models against a
+      deterministic open-source detector I wrote, on US Senate bills published after every model's
+      training cutoff, and archived the rules on Zenodo before any model saw a test page. Asked only
+      to transcribe, Grok 4.7 presented about 99% of the bills' deleted text as current. One added
+      line of instruction made Claude Opus 5.5 and GPT-6 Astra no worse than the detector on page
+      images; the detector costs at most $0.13 per 1,000 pages, the models $1 to $152 at their best
+      settings. I later found two errors in my own scorer and disclosed them in the public README;
+      neither changes an endpoint's verdict, though one changes a clause of the summary.</p>
     </article>
 
     <article class="entry">
@@ -221,29 +268,12 @@
         <span class="tag">Uncertainty quantification</span>
         <span class="when">MIT IMES</span>
       </div>
-      <h3>Calibrated UQ for clinical machine learning</h3>
+      <h3>False arrhythmia alarms in the ICU</h3>
       <p class="sub">Institute for Medical Engineering &amp; Science &middot; Dr. Li-Wei H. Lehman</p>
       <p>In the ICU, a false arrhythmia alarm is a calibration problem before it is an accuracy
-      one. The cost of crying wolf and the cost of a missed event are nothing alike. I used
-      deep-ensemble fully-convolutional networks and conformal-prediction measures to put a
-      calibrated number on each prediction and bring down false negatives.</p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-top">
-        <span class="tag">Evaluation methodology</span>
-        <span class="when">Starwood Property Trust</span>
-      </div>
-      <h3>Reproducing expert comparable selection</h3>
-      <p class="sub">Self-directed</p>
-      <p>I framed real-estate comparable selection as learning-to-rank over roughly six million
-      properties resolved across several databases, trained on the comp sets expert analysts had
-      actually chosen. The result I am proudest of is a negative one. A plain per-row classifier
-      beat the listwise ranking objectives on realistic full-pool retrieval, even though those
-      rankers won on closed-set cross-validation. That gap turned out to be a methodological trap
-      worth fixing: I rebuilt evaluation around full-pool tests, pre-registered ship-or-reject
-      gates, and honest reporting of nulls, then showed the real ceiling lives in candidate
-      generation rather than in the ranker.</p>
+      one: the cost of crying wolf and the cost of a missed event are nothing alike. I applied
+      deep-ensemble fully convolutional networks and explored conformal-prediction measures, aiming
+      to put a calibrated number on each prediction and bring down false negatives.</p>
     </article>
   </section>
 
@@ -252,57 +282,64 @@
       <canvas id="rag" class="figcanvas live" aria-hidden="true"></canvas>
     </div>
     <figcaption><b>Retrieval-augmented generation</b> grounds a model in evidence rather than memory:
-    it pulls the passages closest to a question, then writes its answer from what it found. Letting a
-    model look things up instead of trusting it to remember is what makes the answer trustworthy.</figcaption>
+    it pulls the passages closest to a question, then writes its answer from what it found, so the
+    answer can be checked against its sources.</figcaption>
   </figure>
 
-  <section class="section" aria-labelledby="industry">
-    <h2 class="eyebrow" id="industry">Selected industry work</h2>
+  <section class="section" aria-labelledby="opensource">
+    <h2 class="eyebrow" id="opensource">Open source</h2>
+    <p>These projects share one question: on noisy data, how do you know whether a result is real?
+    All are MIT-licensed and run on a laptop.</p>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Independent consulting</span>
-        <span class="when">Stealth</span>
+        <span class="tag">Conformal prediction &middot; UQ</span>
+        <span class="when"><a href="https://github.com/niles-liu/conformal-selective-uq" aria-label="conformal-selective-uq on GitHub">GitHub&nbsp;&nearr;</a></span>
       </div>
-      <h3>Pivotal-trial biostatistics</h3>
-      <p>Brought in as an independent consultant, I owned the analytics for a medical-device
-      company's pivotal Phase III trial end to end, as the only data scientist on the engagement.
-      I built the pipeline from locked clinical-data exports to analysis-ready datasets, then ran
-      the statistics on top of it. Survival analysis, recurrent-event modeling, and a hierarchical
-      composite-endpoint adjudication for win-ratio comparison. I wrote a Monte Carlo trial
-      simulator to stress-test endpoint definitions and statistical power, and built the
-      operational analytics that tracked activation across dozens of international trial sites. One
-      consultant, the full statistical stack of a pivotal trial.</p>
+      <h3>conformal-selective-uq</h3>
+      <p>A pre-registered study of selective conformal regression under distribution shift. The
+      testbed injects a known noise floor into each stock, so abstention is checked against ground
+      truth rather than asserted: the abstention score finds the unrecoverable stocks (AUC 0.81), and
+      online conformal recovers most of the coverage a regime shift destroys (worst-group 0.51 to
+      0.82, against a 0.90 target). Every check is reported as it was frozen, including the two
+      headline checks that missed. One command reproduces every printed number from a fresh clone.
+      The study makes no alpha or return claim.</p>
     </article>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Software engineering</span>
-        <span class="when">Burmester &amp; Vogel</span>
+        <span class="tag">Validation methodology</span>
+        <span class="when"><a href="https://github.com/niles-liu/quant-strategy-validation" aria-label="quant-strategy-validation on GitHub">GitHub&nbsp;&nearr;</a></span>
       </div>
-      <h3>Maritime document intelligence</h3>
-      <p>A top contributor to an Azure pipeline that turns messy maritime documents into
-      structured, queryable records, I built several of its components. Most notably, an in-process
-      TF-IDF and logistic-regression classifier with confidence-gated LLM escalation beat the LLM
-      outright on the highest-stakes class, at a fraction of the cost. The last few percent of
-      accuracy never came from more data. They came from methods that could absorb the
-      inconsistencies of real documents.</p>
+      <h3>quant-strategy-validation</h3>
+      <p>A leakage-free validation harness for systematic-strategy research. It pre-registers its
+      gates, walks forward with an embargo, bootstraps on event clusters, deflates the Sharpe for the
+      trials tried, and checks its gates against null models. It runs on synthetic data with a known
+      ground truth and makes no alpha claims; the deliverable is the discipline to trust a negative
+      result rather than manufacture an edge.</p>
     </article>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Data science</span>
-        <span class="when">Starwood Property Trust</span>
+        <span class="tag">Forecasting &middot; uncertainty</span>
+        <span class="when"><a href="https://github.com/niles-liu/property-price-avm" aria-label="property-price-avm on GitHub">GitHub&nbsp;&nearr;</a></span>
       </div>
-      <h3>A real-estate ML portfolio, built solo</h3>
-      <p>At Starwood, every project I take on is mine end to end, built solo. Over the past year
-      that has meant five production-grade systems: the comparable-selection research above; a
-      data-only valuation model with rolling-origin validation and conformal intervals; a similarity
-      engine that reconciles two databases that agree on almost nothing; a document-extraction
-      platform now in production; and a market-scoring agent on a point-in-time panel with a
-      deterministic, auditable rubric. What stands out is the pace: in a single recent month I
-      shipped two of them, pushed a third to production, and built a fourth from nothing to a working
-      v1.</p>
+      <h3>property-price-avm</h3>
+      <p>A time-aware automated valuation model with rolling-origin validation and conformal
+      prediction intervals. It puts calibrated uncertainty on a heavy-tailed, regime-shifting
+      target and controls for leakage. The error left in its hardest segment traces to missing data
+      rather than to the model.</p>
+    </article>
+
+    <article class="entry">
+      <div class="entry-top">
+        <span class="tag">Learning to rank</span>
+        <span class="when"><a href="https://github.com/niles-liu/comparable-property-ranker" aria-label="comparable-property-ranker on GitHub">GitHub&nbsp;&nearr;</a></span>
+      </div>
+      <h3>comparable-property-ranker</h3>
+      <p>Cross-sectional learning-to-rank for real-estate comparables, with a synthetic demo that
+      runs end to end. It is judged on realistic full-pool retrieval, the setup that exposes the
+      closed-set cross-validation trap.</p>
     </article>
   </section>
 
@@ -312,64 +349,56 @@
     </div>
     <figcaption><b>Time-to-event analysis.</b> A survival curve steps down as events accrue, while
     the shaded band tracks how much the remaining data can still support and the ticks mark patients
-    censored before the end. Two arms pulling apart is the question a pivotal trial exists to answer.</figcaption>
+    censored before the end. Whether two arms pull apart is the question a pivotal trial exists to
+    answer.</figcaption>
   </figure>
 
-  <section class="section" aria-labelledby="opensource">
-    <h2 class="eyebrow" id="opensource">Open source</h2>
-    <p>A single thread runs through the work above. On data that is noisy, autocorrelated, and
-    regime-shifting, the hard part is rarely the model but knowing whether a result is real. These
-    projects are that discipline made concrete, all MIT-licensed and runnable on a laptop.
-    They are built on walk-forward evaluation, leakage controls, ship-or-reject gates fixed before
-    the run, bootstrap that respects correlated samples, calibrated uncertainty, and a willingness
-    to publish the null.</p>
+  <section class="section" aria-labelledby="industry">
+    <h2 class="eyebrow" id="industry">Selected industry work</h2>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Conformal prediction &middot; UQ</span>
-        <span class="when"><a href="https://github.com/niles-liu/conformal-selective-uq">GitHub&nbsp;&nearr;</a></span>
+        <span class="tag">Independent consulting</span>
+        <span class="when">Medical-device company</span>
       </div>
-      <h3>conformal-selective-uq</h3>
-      <p>A pre-registered study of selective conformal regression under distribution shift. The
-      testbed injects a known noise floor into each stock, so abstention is checked against ground
-      truth rather than asserted: the abstention score finds the unrecoverable stocks (AUC 0.81), and
-      online conformal recovers most of the coverage a regime shift destroys (worst-group 0.51 to
-      0.82, against a 0.90 target). Every check is reported as it was frozen, including the two that
-      missed. It makes no alpha or return claim.</p>
+      <h3>Pivotal-trial biostatistics</h3>
+      <p>I consulted on a pivotal Phase III trial as the only data scientist on the engagement. I
+      built the pipeline from locked clinical-data exports to analysis-ready datasets, then ran
+      analyses on top of it: survival analysis, recurrent-event modeling,
+      and a hierarchical composite endpoint for win-ratio comparison. I wrote a Monte Carlo trial
+      simulator to stress-test endpoint definitions and statistical power, and built the operational
+      analytics that tracked activation across dozens of international trial sites.</p>
     </article>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Validation methodology</span>
-        <span class="when"><a href="https://github.com/niles-liu/quant-strategy-validation">GitHub&nbsp;&nearr;</a></span>
+        <span class="tag">Software engineering</span>
+        <span class="when">Maritime analytics firm</span>
       </div>
-      <h3>quant-strategy-validation</h3>
-      <p>A leakage-free validation harness for systematic-strategy research. It pre-registers its
-      gates, walks forward with an embargo, bootstraps on event clusters, deflates the Sharpe for the
-      trials tried, and reports its nulls honestly. It makes no alpha claims; the deliverable is the
-      discipline to trust a negative result rather than manufacture an edge.</p>
+      <h3>Maritime document intelligence</h3>
+      <p>A top contributor to an Azure pipeline that turns messy maritime documents into
+      structured, queryable records, I built several of its components. Most notably, an in-process
+      TF-IDF and logistic-regression classifier with confidence-gated LLM escalation beat the LLM on
+      recall for the highest-stakes class and cut how often the LLM is called. The last few percent
+      of accuracy never came from more data. They came from methods that could absorb the
+      inconsistencies of real documents. More recently I built a new backend for a legacy desktop
+      vessel-management system on my own, and it is now in production.</p>
     </article>
 
     <article class="entry">
       <div class="entry-top">
-        <span class="tag">Forecasting &middot; uncertainty</span>
-        <span class="when"><a href="https://github.com/niles-liu/property-price-avm">GitHub&nbsp;&nearr;</a></span>
+        <span class="tag">Data science</span>
+        <span class="when">Real-estate investment firm</span>
       </div>
-      <h3>property-price-avm</h3>
-      <p>A time-aware automated valuation model with rolling-origin validation and conformal
-      prediction intervals. It puts calibrated uncertainty on a heavy-tailed, regime-shifting
-      target, controls for leakage, and reports honestly on where the real ceiling lives.</p>
-    </article>
-
-    <article class="entry">
-      <div class="entry-top">
-        <span class="tag">Learning to rank</span>
-        <span class="when"><a href="https://github.com/niles-liu/comparable-property-ranker">GitHub&nbsp;&nearr;</a></span>
-      </div>
-      <h3>comparable-property-ranker</h3>
-      <p>Cross-sectional learning-to-rank for real-estate comparables, the same mechanic that
-      drives systematic-equity selection. It is evaluated on realistic full-pool retrieval, the
-      setup that exposes the closed-set cross-validation trap.</p>
+      <h3>A real-estate ML portfolio, built solo</h3>
+      <p>I have taken every project at the firm from idea to working system on my own. Since mid-2025
+      that has meant six systems: the comparable-selection research above; a sale-price valuation
+      model; a similarity engine that reconciles two databases that agree on almost nothing; a
+      document-extraction platform now in production; a market-scoring agent on a point-in-time
+      panel with a deterministic, auditable rubric; and a news-annotation platform where a
+      home-built local model does the classification and no model sets the published score. Within
+      two weeks in June 2026 I delivered two of them, pushed a third to production, and built a
+      fourth from nothing to a near-deliverable&nbsp;v1.</p>
     </article>
   </section>
 
@@ -378,14 +407,15 @@
       <canvas id="str" class="figcanvas live" aria-hidden="true"></canvas>
     </div>
     <figcaption><b>A vibrating string</b> takes its pitch from the length left free to ring, and its
-    colour from the overtones riding above the fundamental. A fluency that long predates the
+    color from the overtones riding above the fundamental. A fluency that long predates the
     technical ones.</figcaption>
   </figure>
 
   <section class="section" aria-labelledby="education">
     <h2 class="eyebrow" id="education">Education</h2>
     <div class="row">
-      <span class="what"><b>Harvard University</b>, M.S. Data Science (thesis track)</span>
+      <span class="what"><b>Harvard University</b>, M.S. Data Science (thesis track)
+        <span class="gloss">Joint program of Computer Science and Statistics</span></span>
       <span class="note">2026&ndash;27</span>
     </div>
     <div class="row">
@@ -399,24 +429,25 @@
   <section class="section" aria-labelledby="teaching">
     <h2 class="eyebrow" id="teaching">Teaching</h2>
     <p>I came to teaching unsure I was outgoing enough for it. What I learned is that the job is
-    mostly listening. As a Head TA at the MIT Experimental Study Group, in Linear Algebra and
-    earlier in Multivariable Calculus and General Chemistry, I started to measure a good session by
-    how much the students talked, not how much I did. I was later invited to teach my own ES.1802
-    section, and received the Fiekowsky Award for Distinguished Teaching in 2026.</p>
+    mostly listening. I was a TA at the MIT Experimental Study Group in General Chemistry,
+    Multivariable Calculus and Linear Algebra, the last as Head TA. There I started to measure a
+    good session by how much the students talked, not how much I did. I was later invited to teach a multivariable
+    calculus section of my own, and received the Fiekowsky Award for Distinguished Teaching in
+    2026.</p>
   </section>
 
   <section class="section" aria-labelledby="beyond">
     <h2 class="eyebrow" id="beyond">Beyond research</h2>
     <div class="row">
-      <span class="what"><b>Violin</b>, nineteen years and counting. The last four with the MIT
-        Chamber Music Society, on an Emerson/Harris scholarship.</span>
+      <span class="what"><b>Violin</b>, nineteen years and counting, including the MIT Chamber
+        Music Society and four years on an Emerson/Harris scholarship.</span>
     </div>
     <div class="row">
-      <span class="what"><b>Fencing</b> (foil), competitive since 2012. Two-time USFCA Division III
-        All-America at MIT.</span>
+      <span class="what"><b>Fencing</b> (foil), 2012&ndash;26, the last four seasons at MIT.
+        Two-time USFCA Division III All-America.</span>
     </div>
-    <p class="gloss" style="margin-top:.7em">Both reward what research rewards. Patient work, with
-    no way to disguise failure, and wins that are concrete and entirely your own.</p>
+    <p class="gloss" style="margin-top:.7em">Both reward what research rewards: patient work, no
+    way to disguise failure, and wins that are concrete and entirely your own.</p>
   </section>
 
   <footer>
@@ -854,7 +885,7 @@
   }
 
   /* ---------- 5. a vibrating string: pitch from length, colour from overtones --- *
-   * the cursor is a finger stopping the string — slide it up to shorten the free   *
+   * the cursor is a finger stopping the string: slide it up to shorten the free    *
    * length and the note rises (and rings faster).                                  */
   makeFig("str", {
     build: function(W,H,s){ s.time=0; s.f=0; s.phase=0; },
